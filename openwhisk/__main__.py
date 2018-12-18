@@ -6,6 +6,7 @@ import time
 import base64
 import io
 
+
 def load_graph(frozen_graph_filename):
     # read protobuf pb into graph_def
     with tf.gfile.GFile(frozen_graph_filename, "rb") as f:
@@ -18,7 +19,8 @@ def load_graph(frozen_graph_filename):
 
     return graph
 
-tf_nn_num_styles = 26;
+
+tf_nn_num_styles = 26
 image_sizes = [600, 700, 800]
 # 1024 richiede 512
 
@@ -32,13 +34,15 @@ stata.jpg
 tower.jpg
 '''
 
+
 def response_message(statusCode, jsonContent):
     return {"statusCode": statusCode,
             "headers": {"Content-Type": "application/json"},
             "body": json.dumps(jsonContent)}
 
+
 def main(args):
-    #payload = json.loads(event["body"])
+    # payload = json.loads(event["body"])
 
     # image = Image.open(io.BytesIO(base64.b64decode(payload["image"])))
     image = Image.open("./testImages/bird.jpg")
@@ -72,14 +76,14 @@ def main(args):
     image = np.expand_dims(image, axis=0)
 
     start_millis = int(round(time.time() * 1000))
-    with tf.Session(graph = graph) as sess:
+    with tf.Session(graph=graph) as sess:
 
         output = sess.run(output_tensor,
-                          feed_dict = {   input_image_tensor: image,
-                                          input_style_tensor: style_vals
+                          feed_dict={input_image_tensor: image,
+                                     input_style_tensor: style_vals
                                      }
                           )
-        output_squeezed = np.array(np.squeeze(output, axis=0)*255, dtype=np.uint8)
+        output_squeezed = np.array(np.squeeze(output, axis=0) * 255, dtype=np.uint8)
         image = Image.fromarray(output_squeezed).resize(original_size)
         # image = Image.fromarray(output_squeezed)
         # image.show()
@@ -92,7 +96,5 @@ def main(args):
         encoded_result = base64.b64encode(result_buffer.getvalue())
         return response_message(200, {'image': encoded_result})
 
-    return response_message(200, "Internal A3E Stylize error")
-
-#if __name__ == '__main__':
+# if __name__ == '__main__':
 #    main({})
