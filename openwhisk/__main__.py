@@ -1,9 +1,5 @@
 import cv2
-# from PIL import Image
-# import time
 import base64
-# import io
-# import json
 import numpy as np
 
 def main(args):
@@ -12,8 +8,8 @@ def main(args):
               "./models/instance_norm/mosaic.t7",
               "./models/instance_norm/candy.t7" ]
 
-    #img = cv2.imread("./testImages/chicago.jpg")
-    #style = 0
+    # img = cv2.imread("./testImages/chicago.jpg")
+    # style = 0
 
     # >0 Return a 3-channel color image.
     img = cv2.imdecode(np.fromstring(base64.b64decode(args["image"]), dtype=np.uint8),1)
