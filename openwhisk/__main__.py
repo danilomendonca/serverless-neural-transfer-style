@@ -14,7 +14,7 @@ def main(args):
 
     #img = cv2.imread("./testImages/chicago.jpg")
     #style = 0
-    
+
     # >0 Return a 3-channel color image.
     img = cv2.imdecode(np.fromstring(base64.b64decode(args["image"]), dtype=np.uint8),1)
     style = args["style"]
@@ -50,8 +50,8 @@ def main(args):
 
     # convert image from BGR to RGB and then to uint8 without strange artifacts
     out = cv2.convertScaleAbs(cv2.cvtColor(out, cv2.COLOR_BGR2RGB))
-    
-    # https://docs.opencv.org/3.0-beta/modules/imgcodecs/doc/reading_and_writing_images.html#imencode 
+
+    # https://docs.opencv.org/3.0-beta/modules/imgcodecs/doc/reading_and_writing_images.html#imencode
     retval, buffer = cv2.imencode('.png', out)
     return {"statusCode":200,"headers":{"Content-Type":"application/json"},"body":{"stylizedImage":base64.b64encode(buffer)}}
 

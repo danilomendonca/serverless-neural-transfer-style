@@ -1,0 +1,19 @@
+{
+    "functionName": "neuralTransfer",
+    "path": "openwhisk/neuralTransfer.zip",
+    "runtime": "python",
+    "runtimeVersion": 2.7,
+    "dependencies": [
+      {
+        "lib": "numpy",
+        "version": ">=1.15"
+      },
+      {
+       "lib": "opencv",
+       "version": ">=3.4.2"
+      }
+    ],
+    "memory": 512,
+    "paramName": "body",
+    "authenticated": false
+}
