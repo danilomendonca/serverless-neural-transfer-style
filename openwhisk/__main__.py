@@ -4,8 +4,7 @@ import numpy as np
 
 def main(args):
     # get models
-    models = ["./models/instance_norm/udnie.t7",
-              "./models/instance_norm/mosaic.t7",
+    models = ["./models/instance_norm/mosaic.t7",
               "./models/instance_norm/candy.t7" ]
 
     # img = cv2.imread("./testImages/chicago.jpg")
