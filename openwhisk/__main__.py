@@ -7,14 +7,16 @@ def main(args):
     models = ["./models/instance_norm/mosaic.t7",
               "./models/instance_norm/candy.t7" ]
 
-    img = cv2.imread("./testImages/chicago.jpg")
-    style = 0
+    # img = cv2.imread("./testImages/chicago.jpg")
+    # style = 0
 
     # >0 Return a 3-channel color image.
-    #img = cv2.imdecode(np.fromstring(base64.b64decode(args["image"]), dtype=np.uint8),1)
-    # style = args["style"]
+    img = cv2.imdecode(np.fromstring(base64.b64decode(args["image"]), dtype=np.uint8),1)
+    style = args["style"]
 
     # load user chosen model
+    if style >= len(models):
+	style = 0
     net = cv2.dnn.readNetFromTorch(models[style])
 
     # resize image if necessary
