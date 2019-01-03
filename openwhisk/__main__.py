@@ -21,7 +21,7 @@ def main(args):
 
     # resize image if necessary
     h, w = img.shape[:2]
-    width = 700
+    width = 500
     if w <= width:
         width = w
         dim = (w, h)
