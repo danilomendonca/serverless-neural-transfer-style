@@ -16,7 +16,7 @@ def main(args):
 
     # load user chosen model
     if style >= len(models):
-	style = 0
+	    style = 0
     net = cv2.dnn.readNetFromTorch(models[style])
 
     # resize image if necessary
@@ -49,7 +49,9 @@ def main(args):
     out = cv2.convertScaleAbs(cv2.cvtColor(out, cv2.COLOR_BGR2RGB))
 
     # https://docs.opencv.org/3.0-beta/modules/imgcodecs/doc/reading_and_writing_images.html#imencode
-    retval, buffer = cv2.imencode('.png', out)
+    # retval, buffer = cv2.imencode('.png', out)
+    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
+    retval, buffer = cv2.imencode('.jpg', out, encode_param)
     return {"statusCode":200,"headers":{"Content-Type":"application/json"},"body":{"stylizedImage":base64.b64encode(buffer)}}
 
 # if __name__ == '__main__':
