@@ -21,7 +21,7 @@ def main(args):
 
     # resize image if necessary
     h, w = img.shape[:2]
-    width = 500
+    width = 400
     if w <= width:
         width = w
         dim = (w, h)
@@ -50,7 +50,7 @@ def main(args):
 
     # https://docs.opencv.org/3.0-beta/modules/imgcodecs/doc/reading_and_writing_images.html#imencode
     # retval, buffer = cv2.imencode('.png', out)
-    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
+    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 80]
     retval, buffer = cv2.imencode('.jpg', out, encode_param)
     return {"statusCode":200,"headers":{"Content-Type":"application/json"},"body":{"stylizedImage":base64.b64encode(buffer)}}
 
