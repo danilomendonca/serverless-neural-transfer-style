@@ -13,6 +13,6 @@
        "version": ">=3.4.2"
       }
     ],
-    "memory": 512,
+    "memory": 300,
     "authenticated": false
 }
