@@ -25,7 +25,7 @@ def main(args):
     out[1] += 116.779
     out[2] += 123.680
     out = out.transpose(1,2,0)
-    out = cv2.convertScaleAbs(cv2.cvtColor(out, cv2.COLOR_BGR2RGB))
+    out = cv2.convertScaleAbs(out )
     # retval, buffer = cv2.imencode('.png', out)
     encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 95]
     retval, buffer = cv2.imencode('.jpg', out, encode_param)
