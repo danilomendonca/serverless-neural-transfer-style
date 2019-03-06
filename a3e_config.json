@@ -1,6 +1,6 @@
 {
     "functionName": "neuralTransfer",
-    "path": "openwhisk/neuralTransferCache.zip",
+    "path": "openwhisk/neuralTransfer.zip",
     "runtime": "python",
     "runtimeVersion": 2.7,
     "dependencies": [
