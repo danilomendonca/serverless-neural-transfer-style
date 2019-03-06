@@ -3,11 +3,14 @@ import base64
 import numpy as np
 
 def main(args):
-    models = ["./models/instance_norm/mosaic.t7",
-              "./models/instance_norm/candy.t7" ]
+    global cache
+    if 'cache' not in globals():
+        net = cv2.dnn.readNetFromTorch("./models/instance_norm/mosaic.t7")
+        cache = net
+    else:
+        net = cache
+
     img = cv2.imdecode(np.fromstring(base64.b64decode(args["image"]), dtype=np.uint8), 1)
-    style = args["style"]
-    net = cv2.dnn.readNetFromTorch(models[style])
     h, w = img.shape[:2]
     width = 400
     if w <= width:
@@ -25,11 +28,14 @@ def main(args):
     out[1] += 116.779
     out[2] += 123.680
     out = out.transpose(1,2,0)
-    out = cv2.convertScaleAbs(out )
+    out = cv2.convertScaleAbs(out)
     # retval, buffer = cv2.imencode('.png', out)
     encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 95]
     retval, buffer = cv2.imencode('.jpg', out, encode_param)
-    return {"statusCode":200,"headers":{"Content-Type":"application/json"},"body":{"stylizedImage":base64.b64encode(buffer)}}
+    return {"statusCode":200,
+            "headers":{"Content-Type":"application/json"},
+            "body":{"stylizedImage":base64.b64encode(buffer)},
+            "cache": cache}
 
 # if __name__ == '__main__':
 #    main({})
